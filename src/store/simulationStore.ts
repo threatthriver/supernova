@@ -19,6 +19,7 @@ interface SimulationState {
   // Simulation Control
   isPlaying: boolean;
   simulationTime: number; // Controlled time
+  shockwaveThickness: number;
 
   // Actions
   setIntensity: (intensity: number) => void; // Keep for potential physics use
@@ -34,6 +35,7 @@ interface SimulationState {
   resetTime: () => void; // Action to reset time along with simulation
   clearResetFlag: () => void; // <-- Add new action definition
   triggerReset: () => void;
+  setShockwaveThickness: (thickness: number) => void;
 }
 
 export const useSimulationStore = create<SimulationState>((set) => ({
@@ -48,6 +50,7 @@ export const useSimulationStore = create<SimulationState>((set) => ({
   bloomIntensity: 1.5,
   bloomLuminanceThreshold: 0.1,
   bloomLuminanceSmoothing: 0.3,
+  shockwaveThickness: 5.0,
   isPlaying: true, // Start playing by default
   simulationTime: 0,
 
@@ -67,6 +70,7 @@ export const useSimulationStore = create<SimulationState>((set) => ({
   clearResetFlag: () => set({ resetSimulation: false }), // <-- Implement new action
   // Modify triggerReset to also reset time
   triggerReset: () => set({ resetSimulation: true, simulationTime: 0, isPlaying: true }),
+  setShockwaveThickness: (thickness: number) => set({ shockwaveThickness: thickness }),
 }));
 
 // Selector to READ the reset flag (no modification)

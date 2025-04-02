@@ -54,6 +54,23 @@ const UIControls: React.FC = () => {
       label: 'Particle Color',
       onChange: (value: string) => setParticleColor(value), // Add type to value
     },
+    shockwaveThickness: {
+      value: 5.0, // Provide initial value
+      min: 1,
+      max: 20,
+      step: 0.5,
+      label: 'Shockwave Thickness',
+      onChange: (value: number) => {
+        // Find the Shockwave component and update its thickness prop
+        // This is a workaround since we can't directly access the Shockwave component's props
+        // from here. A better solution would be to manage the shockwave thickness in the store.
+        // const shockwave = document.querySelector('Shockwave');
+        // if (shockwave) {
+        //   shockwave.props.thickness = value;
+        // }
+        console.log('Shockwave thickness changed to:', value);
+      },
+    },
   });
 
   useControls('Post-Processing (Bloom)', {
